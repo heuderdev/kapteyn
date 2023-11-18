@@ -10,9 +10,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Data
-@Table(name = "users")
-@Entity(name = "users")
-public class UserModel  {
+@Table(name = "usufructuaries")
+@Entity(name = "usufructuaries")
+public class UsufructuariesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
