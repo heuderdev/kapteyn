@@ -9,19 +9,21 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<UsufructuariesModel,Long> {
+public interface UsufructuariesRepository extends JpaRepository<UsufructuariesModel,Long> {
     @Query("SELECT CASE WHEN COUNT(u.email) > 0 THEN true ELSE false END FROM usufructuaries u WHERE u.email= :email")
     boolean findByEmail(@Param("email") String email);
 
-    @Query("SELECT CASE WHEN COUNT(u.username) > 0 THEN true ELSE false END FROM usufructuaries u WHERE u.username= :username")
-    boolean findByUsername(@Param("username") String username);
+    @Query("SELECT CASE WHEN COUNT(u.login) > 0 THEN true ELSE false END FROM usufructuaries u WHERE u.login= :login")
+    boolean findByUsername(@Param("login") String login);
 
     @Query("SELECT CASE WHEN COUNT(u.id) > 0 THEN true ELSE false END FROM usufructuaries u WHERE u.id= :id")
     boolean checkIfIdExists(@Param("id") Long id);
 
-    @Query("SELECT id,username,email,permission,created_at,update_at FROM usufructuaries")
+    @Query(value = "SELECT U FROM usufructuaries U")
     List<UsufructuariesModel> GetAllUsers();
 
-    @Query("SELECT * FROM usufructuaries WHERE id=:id")
-    UsufructuariesModel queryBuscarUsuarioPorId(@Param("id") Long id);
+    @Query(value = "SELECT U FROM usufructuaries U WHERE U.login = :login")
+    UsufructuariesModel findByLogin(String login);
+
+
 }
